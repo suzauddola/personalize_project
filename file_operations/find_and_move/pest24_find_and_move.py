@@ -1,24 +1,17 @@
 import os
-from os.path import splitext
 import shutil
 
+"""Here we read file from one place and then we moved into three different folder (train, test and val). This 
+operations performed into images(.jpg) and labels(.txt) """
 
 
-
-def move_operations(src, dest, type, name_list, ext):
-    for name in name_list:
-        s_img = src + name.rstrip('\n') + ext
-        d_img = dest + type + "/" + name.rstrip('\n') + ext
-        shutil.copyfile(s_img, d_img)
-
-
-def find_and_move_operations(src, dest):
-    for root, dirs, files in os.walk((os.path.normpath(src)), topdown=False):
-        for name in files:
-            if name.endswith('.jpg'):
-                # print("Found")
-                source_folder = os.path.join(root, name)  # <--- Here is the change
-                shutil.copy2(source_folder, dest)  # <--- Here is the change
+# def find_and_move_operations(src, dest):
+#     for root, dirs, files in os.walk((os.path.normpath(src)), topdown=False):
+#         for name in files:
+#             if name.endswith('.jpg'):
+#                 # print("Found")
+#                 source_folder = os.path.join(root, name)  # <--- Here is the change
+#                 shutil.copy2(source_folder, dest)  # <--- Here is the change
 
 
 def read_single_txt(file):
@@ -30,8 +23,14 @@ def find_and_copy(src, dest):
     shutil.copyfile(src, dest)
 
 
-def read_filepath_and_var():
+def move_operations(src, dest, type, name_list, ext):
+    for name in name_list:
+        s_img = src + name.rstrip('\n') + ext
+        d_img = dest + type + "/" + name.rstrip('\n') + ext
+        shutil.copyfile(s_img, d_img)
 
+
+def read_filepath_and_var():
     img_src = r'F:/Datasets/Pest24/JPEGImages/'
     img_dest = r'F:/Datasets/Pest24/images/'
 
@@ -50,7 +49,7 @@ if __name__ == '__main__':
 
     for type_name in types:
 
-        path_contains_txt_file = 'F:/Datasets/Pest24/ImageSets/'+type_name+'.txt'
+        path_contains_txt_file = 'F:/Datasets/Pest24/ImageSets/' + type_name + '.txt'
         name_list = read_single_txt(path_contains_txt_file)
 
         for ext in exts:
@@ -62,5 +61,3 @@ if __name__ == '__main__':
                 dest = lbl_dest
 
             move_operations(src, dest, type_name, name_list, ext)
-
-
