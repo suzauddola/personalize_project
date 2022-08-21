@@ -1,5 +1,8 @@
 import pandas as pd
+import os
 
+
+# os.chdir()
 
 # rename
 def _rename_inside_txt_file_list(file_with_names, new_file_location, server_location_image_name):
@@ -26,6 +29,29 @@ def pest24_rename_train_test_val():
     server_location_image_name = r"/home/suza/yolo/yolov7/pest24/images/train/"
 
     _rename_inside_txt_file_list(load_file_with_name, new_file_location, server_location_image_name)
+
+
+# can read but can not save into the .txt file
+def read_all_file_name_from_a_location_and_save_into_txt_file():
+    img_file_path = "D:/ResearchData/phd_research/Project/yolo/ScaledYOLOv4/coco/test2017"
+
+    all_image_name = [imagename for imagename in os.listdir(img_file_path)]
+
+    # print(len(all_image_name))
+    counter = 0
+
+    name_file = []
+
+    file = open("new.txt", "w")
+
+    for imagename in all_image_name:
+        file.write(imagename + '\n')
+        name_file.append(imagename + '\n')
+
+    # print("Total Unmatched : " + Integer.toString(counter))
+    print(counter)
+    print(len(name_file))
+    file.close()
 
 
 if __name__ == '__main__':
