@@ -20,13 +20,20 @@ def _rename_inside_txt_file_list(file_with_names, new_file_location, server_loca
 
 # rename
 def pest24_rename_train_test_val():
-    location_of_txt_file = r'F:/Datasets/Pest24/ImageSets/val.txt'
+
+
+    val = "train"
+    # val = "test"
+    # val = "val"
+
+    location_of_txt_file = r'F:/Datasets/Pest24/ImageSets/'+val+'.txt'
     load_file_with_name = pd.read_csv(location_of_txt_file, delim_whitespace=False, header=None, delimiter=',',
                                       names=['name'])
 
-    new_file_location = r'F:/Datasets/Pest24/ImageSets_with_server_locations/val.txt'
+    new_file_location = r'F:/Datasets/Pest24/ImageSets_with_server_locations/'+val+'.txt'
 
-    server_location_image_name = r"/home/suza/yolo/yolov7/pest24/images/train/"
+    # server_location_image_name = r"/home/suza/yolo/yolov7/pest24/images/train/"
+    server_location_image_name = r'./images/'+val+'/'
 
     _rename_inside_txt_file_list(load_file_with_name, new_file_location, server_location_image_name)
 
